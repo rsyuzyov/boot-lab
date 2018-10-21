@@ -16,6 +16,7 @@ refind-install /dev/sdb
 update-refind /dev/sdb
 dpkg-reconfigure refind
 
+https://sourceforge.net/projects/refind/files/0.11.3/  
 https://www.supergrubdisk.org/   
 https://wiki.archlinux.org/index.php/REFInd_(Русский)  
 http://www.rodsbooks.com/refind/drivers.html#finding  
