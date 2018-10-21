@@ -1,38 +1,60 @@
 #!/bin/bash
 
 #Вызов скрипта: init-disk /dev/sdX, где /dev/sdX - целевой диск
+show_help() {
+cat << EOF
+Usage: init-disk /dev/sdX [refind|grub]
+EOF
+}
 
-if [ ! $0 ]; then
-    echo "usage: init-disk /dev/sdX"
-    exit 1
+if [[ ! $1 || ! $2 ]];  then
+    show_help
+    exit 0
 fi
 
-#На время отладки: отключение ранее созданного раздела
+vol=$1
+esp=${1}1
+loader=$2
+
+#На всякий случай попытаемся отмонтировать esp и удалить временные каталоги
 umount ${1}1
 rmdir .${1}1
 rmdir ./dev
 
-
 #Очистка диска
-dd if=/dev/zero of=$1 bs=10M count=1
+dd if=/dev/zero of=$vol bs=10M count=1
 
 #Разметка диска: gpt, раздел ESP {тип - FAT) для размещения загрузчика
 echo -e "label: gpt \n\
 1 : start=2048, size=256M, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B"\
-| sfdisk $1
+| sfdisk $vol
 
 #Форматирование  в FAT
-mkfs.vfat ${1}1
+mkfs.vfat $esp
 
 #Создание каталога для монтирования раздела
 mkdir ./dev
-mkdir .${1}1
-mount ${1}1 .${1}1
+mkdir .$esp
+mount $esp .$esp
 
 #Копирование загрузчика на esp
-mkdir .${1}1/efi
-mkdir .${1}1/efi/boot
+rm -rf .esp/*
+mkdir .$esp/efi
+mkdir .$esp/efi/boot
 
-cp -r ./templates/refind/* .${1}1/efi/boot/
+if [[ $loader == "refind" ]]; then
+    cp -r ./templates/refind/* .$esp/efi/boot/
+else if [[ $loader == "grub" ]]; then
+	cp -r ./templates/grub/* .$esp/efi/boot/
+    else
+	echo "Unknown loader: $loader!"
+	exit 1
+    fi
+fi
 
-echo Done!
+#Размонтирование, удаление временных каталогов
+umount ${1}1
+rmdir .${1}1
+rmdir ./dev
+
+echo "$loader installed on $esp, done!"
