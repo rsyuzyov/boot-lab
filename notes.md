@@ -16,3 +16,4 @@ refind-install /dev/sdb
 update-refind /dev/sdb
 dpkg-reconfigure refind
 
+https://www.supergrubdisk.org/ 
