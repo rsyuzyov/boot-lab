@@ -1,11 +1,17 @@
 #!/bin/bash
 
+#Вызов скрипта: init-disk /dev/sdX, где /dev/sdX - целевой диск
+
+if [ ! $0 ]; then
+    echo "usage: init-disk /dev/sdX"
+    exit 1
+fi
+
 #На время отладки: отключение ранее созданного раздела
 umount ${1}1
 rmdir .${1}1
 rmdir ./dev
 
-#Вызов скрипта: init-disk /dev/sdX, где /dev/sdX - целевой диск
 
 #Очистка диска
 dd if=/dev/zero of=$1 bs=10M count=1
@@ -22,3 +28,11 @@ mkfs.vfat ${1}1
 mkdir ./dev
 mkdir .${1}1
 mount ${1}1 .${1}1
+
+#Копирование загрузчика на esp
+mkdir .${1}1/efi
+mkdir .${1}1/efi/boot
+
+cp -r ./templates/refind/* .${1}1/efi/boot/
+
+echo Done!
