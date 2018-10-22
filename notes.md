@@ -11,6 +11,7 @@ grub-install /dev/sdb
 update-grub /dev/sdb
 grub-mkconfig -o /boot/grub/grub/conf
 dpkg-reconfigure grub-pc
+dpkg-reconfigure grub-efi-amd64
 
 refind-install /dev/sdb
 update-refind /dev/sdb
