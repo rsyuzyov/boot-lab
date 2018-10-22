@@ -44,12 +44,13 @@ mkdir .$esp/efi/boot
 
 if [[ $loader == "refind" ]]; then
     cp -r ./templates/refind/* .$esp/efi/boot/
-else if [[ $loader == "grub" ]]; then
+elif [[ $loader == "grub" ]]; then
 	cp -r ./templates/grub/* .$esp/efi/boot/
-    else
+	mkdir .$esp/grub
+	cp -r ./templates/grub/* .$esp/grub/
+else
 	echo "Unknown loader: $loader!"
 	exit 1
-    fi
 fi
 
 #Размонтирование, удаление временных каталогов
