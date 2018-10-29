@@ -5,7 +5,7 @@ https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81_%D0%B7%
 https://habr.com/post/404511/  о bios и uefi, зачем uefi  
 https://habr.com/post/314412/ - вся суть максимально сжато, но чтобы оценить, понадобилось полностью 
 https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)  
-
+http://4pda.ru/forum/lofiversion/index.php?t468127.html  
 
 # GRUB & Refind
 http://rus-linux.net/MyLDP/boot/GRUB2-full-tutorial.html  
