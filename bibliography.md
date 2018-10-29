@@ -28,5 +28,6 @@ http://www.bog.pp.ru/work/dracut.html
 https://pve.proxmox.com/wiki/ZFS_on_Linux#_installation_as_root_file_system  
 https://habr.com/post/358914/  
 
-# Копиование системы
+# Клонирование, резервное копирование системы
 https://www.linux.org.ru/forum/admin/9871649  
+https://help.ubuntu.ru/wiki/backup  
