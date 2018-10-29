@@ -1,6 +1,5 @@
 # Процесс загрузки
 https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8_Linux  
-https://habr.com/post/253256/ - много лишнего, в начале пути не принесло никакой практической пользы. Но интересно.  
 
 # BIOS & UEFI
 https://habr.com/post/404511/  о bios и uefi, зачем uefi  
@@ -42,3 +41,10 @@ https://habr.com/post/358914/
 # Клонирование, резервное копирование системы
 https://www.linux.org.ru/forum/admin/9871649  
 https://help.ubuntu.ru/wiki/backup  
+
+# Смежные темы
+https://habr.com/post/254415/ - стань повелителем загрузки: создание загрузочного образа  
+https://habr.com/post/253256/ - много лишнего, в начале пути не принесло никакой практической пользы. Но интересно.  
+https://m.habr.com/post/253759/  
+
+
