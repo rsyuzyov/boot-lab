@@ -1,6 +1,6 @@
 # Процесс загрузки
 https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8_Linux  
-https://habr.com/post/253256/ - раздуто, много лишнего, но интересно. Мне в начале пути не принесло никакой практической пользы.  
+https://habr.com/post/253256/ - много лишнего, в начале пути не принесло никакой практической пользы. Но интересно.  
 
 # BIOS & UEFI
 https://habr.com/post/404511/  о bios и uefi, зачем uefi  
@@ -17,10 +17,11 @@ https://wiki.gentoo.org/wiki/GRUB2_Quick_Start/ru
 https://ru.wikibooks.org/wiki/Grub_2  
 https://wiki.debian.org/GrubEFIReinstall  
 
-http://www.rodsbooks.com/refind/  
-https://wiki.archlinux.org/index.php/REFInd_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)  
-https://medium.com/@png2378/%D0%B7%D0%B0%D0%BC%D0%B5%D0%BD%D0%B0-grub-%D0%BD%D0%B0-refind-6520ae8b97bf  
-https://m.habr.com/post/394005/  
+http://www.rodsbooks.com/refind/ - сайт refind  
+https://wiki.archlinux.org/index.php/REFInd_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9) - качественная инструкция  
+https://medium.com/@png2378/%D0%B7%D0%B0%D0%BC%D0%B5%D0%BD%D0%B0-grub-%D0%BD%D0%B0-refind-6520ae8b97bf - howto  
+https://www.bootdev.ru/2017/02/Ustanovka-rEFInd.html - howto  
+https://m.habr.com/post/394005/ - howto  
 http://efi.akeo.ie/ - драйверы различных устройств и фаловых систем (zfs м т.п.) для использования в uefi и refind  
 
 
