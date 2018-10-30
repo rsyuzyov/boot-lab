@@ -70,7 +70,7 @@ zfs set compression=lz4 rootfs
 zfs set sync=disabled rootfs
 ```
 
-### Перенести систему
+### Скопировать систему
 Скопировать root и boot:
 ```
 rsync -aAHXv /* /rootfs --exclude={/rootfs,/swap,/mnt/*,/lost+found,/proc/*,/sys/*,/dev/*,/tmp/*,/boot/efi/*}
@@ -79,16 +79,24 @@ rsync -aAHXv /* /rootfs --exclude={/rootfs,/swap,/mnt/*,/lost+found,/proc/*,/sys
 ```
 mount /dev/sdb1 /rootfs/boot/efiebianx64.efi /rootfs/boot/efi/EFI/boot/bootx64.efi
 ```
+# Настроить новую систему
+Переключить корневую ФС на новую систему:
+```
+mount --bind /dev /rootfs/dev
+mount --bind /proc /rootfs/proc
+mount --bind /sys /rootfs/sys
+chroot /rootfs
+```
 Установить grub:
 ```
-grub-install --no-nvram --root-directory /rootfs --boot-directory /rootfs/boot --efi-directory /rootfs/boot/efi
+grub-install --no-nvram --root-directory / --boot-directory /boot --efi-directory /boot/efi
 ```
 Скопировать файл загрузчика по дефолтному для поиска загрузчика адресу в uefi:  
 ```
-mkdir /rootfs/boot/efi/EFI/boot
-cp /rootfs/boot/efi/EFI/debian/debianx64.efi /rootfs/boot/efi/EFI/boot/bootx64.efi
+mkdir /boot/efi/EFI/boot
+cp /boot/efi/EFI/debian/debianx64.efi /boot/efi/EFI/boot/bootx64.efi
 ```
-Зачистить синформацию о томах lvm в конфигах initramfs, прописать при необходимости новые  
+Зачистить синформацию о томах lvm в конфигах initramfs:  
 ```
 nano /etc/initramfs-tools/conf.d/resume
 ```
@@ -96,12 +104,13 @@ nano /etc/initramfs-tools/conf.d/resume
 
 Пересобрать initramfs:  
 ```
+update-initramfs -u -k all
 ```
 Поправить fstab. Приводим к виду:  
 ```
+/dev/disk/by-label/rootfs /              zfs           errors=remount-ro 0 1
+UUID=XXXX-XXXX            /boot/efi      vfat          umask=0077        0 1
+/swap                     none           swap          sw                0 0
+/dev/sr0                  /media/cdrom0  udf,iso9660   usr,noauto        0 0
 ```
-
-### Установить загрузчик  
-  - добавить нужные модули (lvm, mdadm, zfs)  
-  - установить  
-  - Добавить загрузочную запись в grub, проверить работу  
+где XXXX-XXXX для /boot/efi - это идентификатор блочного устройства, узнать его можно с помощью команды blkid | grep /dev/sdb1  
