@@ -50,7 +50,9 @@ systemctl start zfs*
 ### Разметить диск  
 Создать разделы esp, boot:  
 ```
-echo -e "label: gpt \n\ 1 : start=2048, size=256M, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B" \n\ 2 : size=16G, type=6A898CC3-1DD2-11B2-99A6-080020736631 \" | sfdisk /dev/sdb
+echo -e "label: gpt \n\ 
+1 : start=2048, size=256M, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B" \n\ 
+2 : start=526336, size=16G, type=6A898CC3-1DD2-11B2-99A6-080020736631 \" | sfdisk /dev/sdb
 ```
 (Можно сохранить разметку с уже существующего диска в файл, подправить и загрузить на новый диск: sfdisk -d /dev/sda >> ~/gpt.txt, затем правка и cat ~/gpt.txt | sfdisk /dev/sdb)  
 
