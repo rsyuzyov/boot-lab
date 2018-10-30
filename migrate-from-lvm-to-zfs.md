@@ -6,6 +6,11 @@
 /dev/sd*2 - zfs mirror "rootfs"  
 swap перенести в файл /swap
 
+### sudo -i
+```
+sudo -i
+```
+
 ### Перенести swap
 ```
 dd if=/dev/zero of=/swap bs=256M count=4
@@ -26,11 +31,15 @@ apt update
 
 ### Установить необходимые пакеты  
 ```
-apt install -y dosfstools zfsutils-linux zfs-initramfs grub-efi-amd64
+apt install -y dosfstools linux-headers-$(uname -r) zfsutils-linux zfs-initramfs grub-efi-amd64
 ```
 Если для сборки initrd планируется использовать dracut:  
 ```
 apt install -y dracut zfs-dracut
+```
+Загрузить модуль zfs:  
+```
+modprobe zfs
 ```
 
 ### Разметить диск  
@@ -47,7 +56,11 @@ echo -e "label: gpt \n\
 ```
 mkfs.vfat /dev/sdb1
 ```
-На всякий случай забьем нулями начало /dev/sdb2, чтобы
+Создать датасет zfs:
+```
+zpool create rootfs /dev/sdb2
+zfs 
+```
 
 ### Установить grub или refind  
   - добавить нужные модули (lvm, mdadm, zfs)  
