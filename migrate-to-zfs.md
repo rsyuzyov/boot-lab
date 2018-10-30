@@ -119,7 +119,7 @@ UUID=XXXX-XXXX            /boot/efi      vfat          umask=0077        0 1
 ```
 exit
 ```
-Теперь необходимо отключить для rootfs автомонтирование и очистить точку монтирования:
+Теперь необходимо сменить точку монтирования для rootfs на /root:
 ```
 zfs set mountpoint=/root rootfs
 ```
@@ -147,6 +147,10 @@ menuentry "*** new os ***" {
 }
 ```
 Осталось подложить файл загрузчика по дефолтному для поиска из uefi адресу:  
+```
+mkdir /boot/efi/EFI/boot
+cp /boot/efi/EFI/debian/debianx64.efi /boot/efi/EFI/boot/bootx64.efi
+```
 
 
 Если при перезагрузке открывется UEFI Interactive Shell:
