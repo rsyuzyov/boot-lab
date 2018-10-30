@@ -18,7 +18,7 @@ chmod 644 /swap
 mkswap /swap
 swapon /swap
 ```
-в fstab заменям запись swap:  
+в fstab замеить запись подключения swap:  
 ```
 /swap none swap sw 0 0
 ```
@@ -37,9 +37,11 @@ apt install -y dosfstools linux-headers-$(uname -r) zfsutils-linux zfs-initramfs
 ```
 apt install -y dracut zfs-dracut
 ```
-Загрузить модуль zfs:  
+Запустить zfs:  
 ```
+ln -s /bin/rm /usr/bin/rm
 modprobe zfs
+systemctl start zfs*
 ```
 
 ### Разметить диск  
@@ -56,10 +58,13 @@ echo -e "label: gpt \n\
 ```
 mkfs.vfat /dev/sdb1
 ```
-Создать датасет zfs:
+Создать пул (он же будет и датасетом) zfs:
 ```
-zpool create rootfs /dev/sdb2
-zfs 
+zpool create -o ashift=12 rootfs /dev/sdb2
+zfs set recordsize=4K rootfs
+zfs set atime=off rootfs
+zfs set compression=lz4 rootfs
+zfs set sync=disabled rootfs
 ```
 
 ### Установить grub или refind  
