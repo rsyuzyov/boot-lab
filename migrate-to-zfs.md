@@ -1,14 +1,16 @@
 ### Исходные данные
 Есть /dev/sda (gpt), на нем разделы: esp (/dev/sda1), boot (/dev/sda2) и lvm с debian (/dev/sda3)  
+Все каталоги, в том числе home, находятся на корневом диске  
 Есть пустой /dev/sdb  
-Нужно перенести систему на zfs mirror, получив структуру:
-/dev/sd*1 - esp (fat32 с одним файлом /boot/bootx64.efi)
-/dev/sd*2 - zfs mirror "rootfs"  
-swap перенести в файл /swap
 
+Нужно не выходя из системы перенести систему на зеркало zfs, получив идентичную структуру на обоих дисков:
+/dev/sd*1 - esp (fat с одним файлом /efi/boot/bootx64.efi)
+/dev/sd*2 - zfs mirror "rootfs"  
+swap перенести в файл /swap  
+
+### План  
 [sudo -i](#sudo--i)  
 [Перенести swap](#перенести-swap)  
-[Подключить репозитории](#подключить-репозитории)  
 [Установить необходимые пакеты](#установить-необходимые-пакеты)  
 [Разметить диск](разметить-диск)  
 [Установить grub или refind](#установить-grub-или-refind)  
@@ -32,19 +34,11 @@ swapon /swap
 /swap none swap sw 0 0
 ```
 
-### Подключить репозитории  
-```
-добавить contrib
-apt update
-```
-
 ### Установить необходимые пакеты  
+В первую очередь для основного репозитория подключить набор пакетов (компоненту) contrib - zfs обитает там в виду невозможности включения в main из-за лицензионной несовместимости  
 ```
-apt install -y dosfstools linux-headers-$(uname -r) zfsutils-linux zfs-initramfs grub-efi-amd64
-```
-Если для сборки initrd планируется использовать dracut:  
-```
-apt install -y dracut zfs-dracut
+apt update
+apt install -y rsync dosfstools linux-headers-$(uname -r) zfsutils-linux zfs-initramfs grub-efi-amd64
 ```
 Запустить zfs:  
 ```
@@ -77,13 +71,26 @@ zfs set sync=disabled rootfs
 ```
 
 ### Перенести систему
-  - Скопировать root, boot (и прочее, если есть)  
-  - Зачистить синформацию о старых томах в настройках initram, прописать при необходимости новые  
-  - Сгенерить initramfs (с помощью initramfs или drakut, тоже с модулями lvm, mdadm, zfs)  
-  - Поправить fstab  
-  - Добавить загрузочную запись в grub/refind, проверить работу  
+Скопировать root и boot:
+```
+rsync -aAHXv /* /rootfs --exclude={/rootfs,/swap,/mnt/*,/lost+found,/proc/*,/sys/*,/dev/*,/tmp/*,/boot/efi/*}
+```
+Смонтировать esp в /boot/efi/:  
+```
+mount /dev/sdb1 /rootfs/boot/efi
+```
+Зачистить синформацию о старых томах в настройках initram, прописать при необходимости новые  
+```
+nano /etc/
+```
+Сгенерить initramfs (с помощью initramfs или drakut, тоже с модулями lvm, mdadm, zfs):  
+```
+```
+Поправить fstab. Приводим к виду:  
+```
+```
 
 ### Установить загрузчик  
   - добавить нужные модули (lvm, mdadm, zfs)  
   - установить  
-  - сделать конфиг при необходимости  
+  - Добавить загрузочную запись в grub, проверить работу  
