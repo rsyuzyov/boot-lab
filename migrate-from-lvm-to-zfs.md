@@ -9,13 +9,13 @@ swap перенести в файл /swap
 [sudo -i](#sudo)  
 [Перенести swap](#swap)  
 
-<div id='sudo'/>
+<a name='sudo'/>
 ### sudo -i
 ```
 sudo -i
 ```
 
-<div id='swap'/>
+<a name='swap'/>
 ### Перенести swap
 ```
 dd if=/dev/zero of=/swap bs=256M count=4
