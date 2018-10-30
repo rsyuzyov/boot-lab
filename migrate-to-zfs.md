@@ -139,8 +139,9 @@ nano /boot/grub/grub.cfg
 Перед первым блоком "menuentry" вставить:  
 ```
 set default=0
-set timeout=5
+set timeout=3
 menuentry "*** new os ***" {
+  imsmod part_gpt
   insmod zfs
   linux /vmlinuz-4.9.0-7-amd64 root=zfs=dev/disk/by-label/rootfs boot=zfs
   initrd /initrd.img-4.9.0-7-amd64
