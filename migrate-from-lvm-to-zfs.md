@@ -9,14 +9,12 @@ swap перенести в файл /swap
 [sudo -i](#sudo)  
 [Перенести swap](#swap)  
 
-<a name='sudo'/>
-### sudo -i
+### sudo -i <a name='sudo'/>
 ```
 sudo -i
 ```
 
-<a name='swap'/>
-### Перенести swap
+### Перенести swap <a name='swap'/>
 ```
 dd if=/dev/zero of=/swap bs=256M count=4
 chmod 644 /swap
