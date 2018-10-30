@@ -144,7 +144,7 @@ set timeout=3
 menuentry "*** new os ***" {
   imsmod part_gpt
   insmod zfs
-  linux /vmlinuz-4.9.0-7-amd64 root=zfs=dev/disk/by-label/rootfs quiet
+  linux /vmlinuz-4.9.0-7-amd64 root=ZFS=rootfs quiet
   initrd /initrd.img-4.9.0-7-amd64
 }
 ```
