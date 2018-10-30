@@ -29,7 +29,7 @@ mkswap /swap
 chmod 600 /swap
 swapon /swap
 ```
-в fstab замеить запись подключения swap:  
+Заменить запись подключения swap в fstab:  
 ```
 /swap none swap sw 0 0
 ```
