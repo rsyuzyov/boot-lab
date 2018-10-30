@@ -64,6 +64,7 @@ mkfs.vfat /dev/sdb1
 Создать пул (он же будет и датасетом) zfs:
 ```
 zpool create -o ashift=12 rootfs /dev/sdb2
+zpool set bootfs=rootfs rootfs
 zfs set recordsize=4K rootfs
 zfs set atime=off rootfs
 zfs set compression=lz4 rootfs
@@ -121,7 +122,9 @@ exit
 ```
 Теперь необходимо сменить точку монтирования для rootfs на /root:
 ```
-zfs set mountpoint=/root rootfs
+zfs set canmount=noauto rootfs
+zfs set mountpoint=/ rootfs
+
 ```
 
 
