@@ -26,7 +26,7 @@ sudo -i
 ```
 dd if=/dev/zero of=/swap bs=256M count=4
 mkswap /swap
-chmod 644 /swap
+chmod 600 /swap
 swapon /swap
 ```
 в fstab замеить запись подключения swap:  
