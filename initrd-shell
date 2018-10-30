@@ -1,4 +1,4 @@
-shell = busybox => имеем неплохое башеподобное окружение, можно много чем пользоваться  
+shell = busybox => имеем богатое окружение, можно много чем пользоваться  
 https://wiki.debian.org/InitramfsDebug  
 ```
 cat /proc/modules
