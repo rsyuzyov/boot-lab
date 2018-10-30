@@ -6,14 +6,16 @@
 /dev/sd*2 - zfs mirror "rootfs"  
 swap перенести в файл /swap
 
-[sudo -i](#sudo -i)  
-[Перенести swap][]  
+[sudo -i](#sudo)  
+[Перенести swap][#swap]  
 
+<div id='sudo' />
 ### sudo -i
 ```
 sudo -i
 ```
 
+<div id='swap' />
 ### Перенести swap
 ```
 dd if=/dev/zero of=/swap bs=256M count=4
