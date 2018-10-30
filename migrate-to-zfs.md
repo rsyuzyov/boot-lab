@@ -144,7 +144,6 @@ set default=0
 set timeout=5
 menuentry "*** new os ***" {
   insmod zfs
-  search -l rootfs --set-root
   linux /vmlinuz-4.9.0-7-amd64 root=zfs=dev/disk/by-label/rootfs boot=zfs
   initrd /initrd.img-4.9.0-7-amd64
 }
