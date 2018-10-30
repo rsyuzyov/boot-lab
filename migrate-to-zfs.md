@@ -6,6 +6,7 @@
 Нужно не выходя из системы перенести систему на зеркало zfs, получив идентичную структуру на обоих дисков:
 /dev/sd*1 - esp (fat с одним файлом /efi/boot/bootx64.efi)
 /dev/sd*2 - zfs mirror "rootfs"  
+/boot расположить в корневом разделе (не выносить на отдельный раздел)
 swap перенести в файл /swap  
 
 ### План  
@@ -73,10 +74,10 @@ zfs set sync=disabled rootfs
 ```
 
 ### Скопировать систему
-Скопировать root и boot, смонтировать esp в /boot/efi/:  
+Скопировать root, смонтировать esp в /boot/efi/:  
 ```
 rsync -aAHXv /* /rootfs --exclude={/rootfs,/swap,/mnt/*,/lost+found,/proc/*,/sys/*,/dev/*,/tmp/*,/boot/efi/*}
-mount /dev/sdb1 /rootfs/boot/efiebianx64.efi /rootfs/boot/efi/EFI/boot/bootx64.efi
+mount /dev/sdb1 /rootfs/boot/efi
 ```
 # Настроить новую систему
 Переключить корневую ФС на новую систему:
