@@ -125,7 +125,7 @@ zfs set canmount=noauto rootfs
 zfs set mountpoint=/ rootfs
 
 ```
-
+Если при выполнении будут ошибки, связанные с невозможностью размонртирования, необходимо выполнит перезагрузку и повторить выполнение.  
 
 ### Подготовка к слепой перезагрузке
 Если есть возможность зайти в uefi и указать новый диск в качестве загрузочного, то можно это сделать и пропустить этот раздел.
@@ -144,7 +144,7 @@ set timeout=3
 menuentry "*** new os ***" {
   imsmod part_gpt
   insmod zfs
-  linux /vmlinuz-4.9.0-7-amd64 root=zfs=dev/disk/by-label/rootfs boot=zfs
+  linux /vmlinuz-4.9.0-7-amd64 root=zfs=dev/disk/by-label/rootfs quiet
   initrd /initrd.img-4.9.0-7-amd64
 }
 ```
