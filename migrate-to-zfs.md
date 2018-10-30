@@ -77,13 +77,24 @@ rsync -aAHXv /* /rootfs --exclude={/rootfs,/swap,/mnt/*,/lost+found,/proc/*,/sys
 ```
 Смонтировать esp в /boot/efi/:  
 ```
-mount /dev/sdb1 /rootfs/boot/efi
+mount /dev/sdb1 /rootfs/boot/efiebianx64.efi /rootfs/boot/efi/EFI/boot/bootx64.efi
 ```
-Зачистить синформацию о старых томах в настройках initram, прописать при необходимости новые  
+Установить grub:
 ```
-nano /etc/
+grub-install --no-nvram --root-directory /rootfs --boot-directory /rootfs/boot --efi-directory /rootfs/boot/efi
 ```
-Сгенерить initramfs (с помощью initramfs или drakut, тоже с модулями lvm, mdadm, zfs):  
+Скопировать файл загрузчика по дефолтному для поиска загрузчика адресу в uefi:  
+```
+mkdir /rootfs/boot/efi/EFI/boot
+cp /rootfs/boot/efi/EFI/debian/debianx64.efi /rootfs/boot/efi/EFI/boot/bootx64.efi
+```
+Зачистить синформацию о томах lvm в конфигах initramfs, прописать при необходимости новые  
+```
+nano /etc/initramfs-tools/conf.d/resume
+```
+В нашем случае будет запись типа `RESUME=/dev/mapper/...`, нужно удалить ее.  
+
+Пересобрать initramfs:  
 ```
 ```
 Поправить fstab. Приводим к виду:  
