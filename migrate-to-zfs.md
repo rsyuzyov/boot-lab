@@ -119,6 +119,10 @@ UUID=XXXX-XXXX            /boot/efi      vfat          umask=0077        0 1
 ```
 exit
 ```
+Теперь необходимо отключить для rootfs автомонтирование и очистить точку монтирования:
+```
+zfs set mountpoint=/root rootfs
+```
 
 
 ### Подготовка к слепой перезагрузке
@@ -138,7 +142,18 @@ set timeout=5
 menuentry "*** new os ***" {
   insmod zfs
   search -l rootfs --set-root
-  linux /@/vmlinuz-4.9.0-7-amd64 root=zfs=dev/disk/by-label/rootfs boot=zfs
-  initrd /@/initrd.img-4.9.0-7-amd64
+  linux /vmlinuz-4.9.0-7-amd64 root=zfs=dev/disk/by-label/rootfs boot=zfs
+  initrd /initrd.img-4.9.0-7-amd64
 }
 ```
+Осталось подложить файл загрузчика по дефолтному для поиска из uefi адресу:  
+
+
+Если при перезагрузке открывется UEFI Interactive Shell:
+Для начала смотрим краткие обзначания дисков:
+```
+map
+```
+Как правило для блочных устройств это "blkX", где Х - номер устройства
+Затем перебираем диски, пока не найдем загрузочный. Методика: 
+пишем blk0: и нажимаем tab. Если это раздел esp, то сработает автокомплит и появится строка "EFI". Ставим "\" (это fat!) и повторяем tab. Когда получим файл типа bootx64.efi или grubx64.efi, останется нажать enter для старта загрузчика.
