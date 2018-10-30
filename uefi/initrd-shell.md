@@ -6,4 +6,7 @@ cat /proc/cmdline
 modprobe zfs
 ```
 
+Просмотр содержимого образа:  
+```
 lsinitramfs /boot/initrd
+```
