@@ -116,7 +116,7 @@ UUID=XXXX-XXXX            /boot/efi      vfat          umask=0077        0 1
 где XXXX-XXXX для /boot/efi - это идентификатор блочного устройства, узнать его можно с помощью команды `blkid | grep /dev/sdb1`  
 Создать /swap, так как его не копировали:  
 ```
-dd if=/dev/zero of=/swap
+dd if=/dev/zero of=/swap bs=256M count=4
 mkswap /swap
 ```
 Выходим из chroot:
