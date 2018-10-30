@@ -94,7 +94,7 @@ grub-install --no-nvram --root-directory / --boot-directory /boot --efi-director
 Скопировать файл загрузчика по дефолтному для поиска загрузчика адресу в uefi:  
 ```
 mkdir /boot/efi/EFI/boot
-cp /boot/efi/EFI/debian/debianx64.efi /boot/efi/EFI/boot/bootx64.efi
+cp /boot/efi/EFI/debian/grubx64.efi /boot/efi/EFI/boot/bootx64.efi
 ```
 Зачистить синформацию о томах lvm в конфигах initramfs:  
 ```
