@@ -1,6 +1,6 @@
 ### Исходные данные
 Есть /dev/sda (gpt), на нем разделы: esp (/dev/sda1), boot (/dev/sda2) и lvm с debian (/dev/sda3)  
-Есть /dev/sdb  
+Есть пустой /dev/sdb  
 Нужно перенести систему на zfs mirror, получив структуру:
 /dev/sd*1 - esp (fat32 с одним файлом /boot/bootx64.efi)
 /dev/sd*2 - zfs mirror "rootfs"  
