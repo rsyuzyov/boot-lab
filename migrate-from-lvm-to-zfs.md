@@ -7,7 +7,7 @@
 swap перенести в файл /swap
 
 [sudo -i](#sudo--i-)  
-[Перенести swap](#swap)  
+[Перенести swap](#перенести-swap)  
 
 ### sudo -i
 ```
