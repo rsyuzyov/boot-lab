@@ -118,6 +118,7 @@ UUID=XXXX-XXXX            /boot/efi      vfat          umask=0077        0 1
 ```
 dd if=/dev/zero of=/swap bs=256M count=4
 mkswap /swap
+chmod 600 /swap
 ```
 Выходим из chroot:
 ```
