@@ -151,7 +151,7 @@ menuentry "*** new os ***" {
 Осталось подложить файл загрузчика по дефолтному для поиска из uefi адресу:  
 ```
 mkdir /boot/efi/EFI/boot
-cp /boot/efi/EFI/debian/debianx64.efi /boot/efi/EFI/boot/bootx64.efi
+cp /boot/efi/EFI/debian/grubx64.efi /boot/efi/EFI/boot/bootx64.efi
 ```
 
 
