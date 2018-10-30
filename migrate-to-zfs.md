@@ -173,7 +173,7 @@ map
 
 ### Переразбивка sda, создание зеркала
 ```
-sfdisk /dev/sda << EOF
+sfdisk -f /dev/sda << EOF
 label: gpt
 1 : start=2048, size=256M, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B
 2 : start=526336, size=16G, type=6A898CC3-1DD2-11B2-99A6-080020736631
