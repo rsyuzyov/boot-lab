@@ -114,7 +114,11 @@ UUID=XXXX-XXXX            /boot/efi      vfat          umask=0077        0 1
 /dev/sr0                  /media/cdrom0  udf,iso9660   usr,noauto        0 0
 ```
 где XXXX-XXXX для /boot/efi - это идентификатор блочного устройства, узнать его можно с помощью команды `blkid | grep /dev/sdb1`  
-
+Создать /swap, так как его не копировали:  
+```
+dd if=/dev/zero /of=/swap
+mkswap /swap
+```
 Выходим из chroot:
 ```
 exit
@@ -154,7 +158,7 @@ mkdir /boot/efi/EFI/boot
 cp /boot/efi/EFI/debian/grubx64.efi /boot/efi/EFI/boot/bootx64.efi
 ```
 
-
+================
 Если при перезагрузке открывется UEFI Interactive Shell:
 Для начала смотрим краткие обзначания дисков:
 ```
@@ -164,3 +168,13 @@ map
 Затем перебираем диски, пока не найдем загрузочный. Методика: 
 пишем blk0: и нажимаем tab. Если это раздел esp, то сработает автокомплит и появится строка "EFI". Ставим "\" (это fat!) и повторяем tab. Когда получим файл типа bootx64.efi или grubx64.efi, останется нажать enter для старта загрузчика.
 
+================
+
+### Переразбивка sda, создание зеркала
+```
+sfdisk /dev/sda << EOF
+label: gpt
+1 : start=2048, size=256M, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B
+2 : start=526336, size=16G, type=6A898CC3-1DD2-11B2-99A6-080020736631
+EOF
+```
