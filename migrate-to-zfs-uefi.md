@@ -50,7 +50,7 @@ apt install -y rsync dosfstools linux-headers-$(uname -r) zfsutils-linux zfs-ini
 ```
 Запустить zfs:  
 ```
-ln -s /bin/ьлштшrm /usr/bin/rm
+ln -s /bin/rm /usr/bin/rm
 modprobe zfs
 systemctl start zfs*
 ```
