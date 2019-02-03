@@ -74,7 +74,7 @@ mkfs.vfat /dev/sdb1
 ```
 zpool create -o ashift=12 rootfs /dev/sdb2
 zfs create -o canmount=off -o mountpoint=none rootfs/rootfs
-zpool set bootfs=rootfs/rootfs rootfs/rootfs
+zpool set bootfs=rootfs/rootfs rootfs
 zfs set recordsize=4K rootfs
 zfs set atime=off rootfs
 zfs set compression=lz4 rootfs
