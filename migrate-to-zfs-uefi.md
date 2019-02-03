@@ -70,10 +70,11 @@ EOF
 ```
 mkfs.vfat /dev/sdb1
 ```
-Создать пул (он же будет и датасетом) zfs:
+Создать пул и датасет:
 ```
 zpool create -o ashift=12 rootfs /dev/sdb2
-zpool set bootfs=rootfs rootfs
+zfs create -o canmount=off -o mountpoint=none rootfs/rootfs
+zpool set bootfs=rootfs/rootfs rootfs/rootfs
 zfs set recordsize=4K rootfs
 zfs set atime=off rootfs
 zfs set compression=lz4 rootfs
@@ -83,7 +84,7 @@ zfs set sync=disabled rootfs
 ### Скопировать систему
 Скопировать root, смонтировать esp в /boot/efi/:  
 ```
-rsync -aAHXv /* /rootfs --exclude={/rootfs,/swap,/mnt/*,/lost+found,/proc/*,/sys/*,/dev/*,/tmp/*,/boot/efi/*}
+rsync -aAHXv /* /rootfs/rootfs --exclude={/rootfs,/swap,/mnt/*,/lost+found,/proc/*,/sys/*,/dev/*,/tmp/*,/boot/efi/*}
 mount /dev/sdb1 /rootfs/boot/efi
 ```
 # Настроить новую систему
@@ -115,7 +116,7 @@ update-initramfs -u -k all
 ```
 Поправить fstab. Приводим к виду:  
 ```
-/dev/disk/by-label/rootfs /              zfs           errors=remount-ro 0 1
+/dev/disk/by-label/rootfs/rootfs /              zfs           errors=remount-ro 0 1
 UUID=XXXX-XXXX            /boot/efi      vfat          umask=0077        0 1
 /swap                     none           swap          sw                0 0
 /dev/sr0                  /media/cdrom0  udf,iso9660   usr,noauto        0 0
@@ -134,7 +135,8 @@ exit
 Теперь необходимо сменить точку монтирования для rootfs на /root:
 ```
 zfs set canmount=noauto rootfs
-zfs set mountpoint=/ rootfs
+zfs set canmount=noauto rootfs/rootfs
+zfs set mountpoint=/ rootfs/rootfs
 
 ```
 Если при выполнении будут ошибки, связанные с невозможностью размонртирования, необходимо перезагрузиться и повторить выполнение.  
