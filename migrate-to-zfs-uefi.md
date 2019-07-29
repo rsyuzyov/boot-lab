@@ -85,15 +85,15 @@ zfs set sync=disabled rootfs
 Скопировать root, смонтировать esp в /boot/efi/:  
 ```
 rsync -aAHXv /* /rootfs/rootfs --exclude={/rootfs,/swap,/mnt/*,/lost+found,/proc/*,/sys/*,/dev/*,/tmp/*,/boot/efi/*}
-mount /dev/sdb1 /rootfs/boot/efi
+mount /dev/sdb1 /rootfs/rootfs/boot/efi
 ```
 # Настроить новую систему
 Переключить корневую ФС на новую систему:
 ```
-mount --rbind /dev /rootfs/dev
-mount --rbind /proc /rootfs/proc
-mount --rbind /sys /rootfs/sys
-chroot /rootfs
+mount --rbind /dev /rootfs/rootfs/dev
+mount --rbind /proc /rootfs/rootfs/proc
+mount --rbind /sys /rootfs/rootfs/sys
+chroot /rootfs/rootfs
 ```
 Установить grub:
 ```
