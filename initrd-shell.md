@@ -10,3 +10,12 @@ modprobe zfs
 ```
 lsinitramfs /boot/initrd
 ```
+
+
+Не примонировался root на zfs:  
+```
+modprode zfs
+import -R /root rpool
+exec switch_root /root /sbin/init
+exec switch_root /root /sbin/init
+```
