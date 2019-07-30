@@ -23,8 +23,12 @@ https://wiki.archlinux.org/index.php/REFInd_(Русский)
 http://www.rodsbooks.com/refind/drivers.html#finding  
 
 grub-install:
---removable
---efi-directory
---boot-directory
---root-directory
---uefi-secure-boot
+--removable  
+--efi-directory  
+--boot-directory  
+--root-directory  
+--uefi-secure-boot  
+
+bootctl  
+pve-efiboot-tool  
+systemd-boot  
