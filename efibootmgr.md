@@ -11,4 +11,11 @@ https://www.linuxbabe.com/command-line/how-to-use-linux-efibootmgr-examples
  Важно  
 Путь к образу EFI для загрузки должен в качестве разделителя в путях содержать \ (обратный слеш) вместо / (передний слеш).  
 
-efibootmgr -c -d /dev/sda -p 7 -L <label> -l \EFI\<lable>\grubx64.efi
+Удалить запись:
+```
+efibootmgr -Bb 0000
+```
+Добавить запись:
+```
+efibootmgr -c -d /dev/sda -p 2 -L "Disk 0" -l \\EFI\\BOOT\\BOOTX64.EFI
+```
