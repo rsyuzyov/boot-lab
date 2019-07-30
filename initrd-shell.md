@@ -12,7 +12,7 @@ lsinitramfs /boot/initrd
 ```
 
 
-Не примонировался root на zfs:  
+Не примонтировался root на zfs:  
 ```
 modprode zfs
 import -R /root rpool
