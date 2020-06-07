@@ -19,3 +19,8 @@ import -R /root rpool
 exec switch_root /root /sbin/init
 exec switch_root /root /sbin/init
 ```
+После загрузки:
+```
+echo " rootdelay=3 root=ZFS=rpool/ROOT/pve-1 boot=zfs" > /etc/kernel/cmdline
+pve-efiboot-tool refresh
+```
