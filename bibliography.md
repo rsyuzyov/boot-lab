@@ -1,5 +1,7 @@
 # Процесс загрузки
 https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81_%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8_Linux  
+https://habr.com/ru/articles/113350/  
+https://parallel.uran.ru/book/export/html/377
 
 # BIOS & UEFI
 https://habr.com/post/404511/  о bios и uefi, зачем uefi  
