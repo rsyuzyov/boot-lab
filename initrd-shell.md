@@ -14,7 +14,7 @@ lsinitramfs /boot/initrd
 
 Не примонтировался root на zfs:  
 ```
-modprode zfs
+modprobe zfs
 import -R /root rpool
 exec switch_root /root /sbin/init
 exec switch_root /root /sbin/init
